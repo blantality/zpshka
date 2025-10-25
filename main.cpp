@@ -1,7 +1,10 @@
 #include <iostream>
 
 unsigned isPyth(unsigned a, unsigned b, unsigned c) {
-  if ((a*a + b*b == c*c) || (a*a + c*c == b*b) || (c*c + b*b == a*a )){return 1;}else{return 0;}
+  if ((a*a + b*b == c*c) || (a*a + c*c == b*b) || (c*c + b*b == a*a )) {
+    return 1; } 
+  else { return 0;
+  }
 }
 
 int main() {
