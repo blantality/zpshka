@@ -18,7 +18,9 @@ unsigned isPyth(unsigned a, unsigned b, unsigned c, bool &overflow) {
   unsigned bb = b * b;
   unsigned cc = c * c;
 
-  if (aa > std::numeric_limits<unsigned>::max() - bb || aa > std::numeric_limits<unsigned>::max() - cc || bb > std::numeric_limits<unsigned>::max() - cc) {
+  if (aa > std::numeric_limits<unsigned>::max() - bb || 
+      aa > std::numeric_limits<unsigned>::max() - cc || 
+      bb > std::numeric_limits<unsigned>::max() - cc) {
     overflow = true;
     return 0;
   }
