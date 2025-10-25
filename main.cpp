@@ -35,7 +35,8 @@ int main() {
   while (true) {
     if (!(std::cin >> a >> b >> c)) {
       if (std::cin.eof()) {
-        break;
+          std::cerr << "Error: invalid input\n";
+          return 1;
       } else {
         std::cerr << "Error: nvalid input\n";
         return 1;
