@@ -2,8 +2,8 @@
 
 int main() {
   using u_t = unsigned;
-  u_t a = 0;
   size_t count = 0;
+  size_t a = 0;
   std::cin >> a;
   while (std::cin >> a) {
     count++;
