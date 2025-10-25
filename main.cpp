@@ -6,7 +6,7 @@ int main() {
   size_t a = 0;
   std::cin >> a;
   while (std::cin >> a) {
-    count++;
+    count += a*a;
   }
   
   if (std::cin.eof()) {
