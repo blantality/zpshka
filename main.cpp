@@ -1,25 +1,67 @@
 #include <iostream>
+#include <limits>
 
-unsigned isPyth(unsigned a, unsigned b, unsigned c) {
-  if ((a*a + b*b == c*c) || (a*a + c*c == b*b) || (c*c + b*b == a*a )) {
-    return 1;} 
-  else { return 0;
+bool isOverflow(unsigned a, unsigned b) {
+  if (a != 0 && a > std::numeric_limits<unsigned>::max() / b) {
+    return true;
+  }  
+  return false;
+}
+
+unsigned isPyth(unsigned a, unsigned b, unsigned c, bool &overflow) {
+  if (isOverflow(a, a) || isOverflow(b, b) || isOverflow(c, c)) {
+    overflow = true;
+    return 0;
   }
+
+  unsigned aa = a * a;
+  unsigned bb = b * b;
+  unsigned cc = c * c;
+
+  if (aa > std::numeric_limits<unsigned>::max() - bb || aa > std::numeric_limits<unsigned>::max() - cc || bb > std::numeric_limits<unsigned>::max() - cc) {
+    overflow = true;
+    return 0;
+  }
+
+  return (aa + bb == cc) || (aa + cc == bb) || (bb + cc == aa);
 }
 
 int main() {
   using u_t = unsigned;
   size_t count = 0;
   u_t a = 0, b = 0, c = 0;
-  while (std::cin >> a >> b >> c) {
-    count += isPyth(a, b, c);
+  bool overflow = false;
+
+  while (true) {
+    if (!(std::cin >> a >> b >> c)) {
+      if (std::cin.eof()) {
+        break;
+      } else {
+        std::cerr << "Error: nvalid input\n";
+        return 1;
+      }
+    }
+
+    count += isPyth(a, b, c, overflow);
+
+    if (overflow) {
+      std::cerr << "Error: overflow\n";
+      return 2;
+    }
   }
-  
-  if (std::cin.eof()) {
-    std::cout << count;
-    std::cout << "\n";
-  } else if (std::cin.fail()) {
-    std::cerr << "Error\n";
-    return 1;
-  }
+
+  std::cout << count << "\n";
+  return 0;
+
 }
+
+
+
+
+
+
+
+
+
+
+
